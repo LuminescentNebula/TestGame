@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="ContentDescription">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <!--Base parts-->
+        <ImageView
+            android:id="@+id/tail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ship_tail"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/middle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-2dp"
+            android:src="@drawable/ship_middle"
+            app:layout_constraintStart_toEndOf="@+id/tail"
+            app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/head"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-2dp"
+            android:src="@drawable/ship_head"
+            app:layout_constraintStart_toEndOf="@+id/middle"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--Floor-->
+        <ImageView
+            android:id="@+id/tail_floor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:src="@drawable/ship_tail_floor"
+            app:layout_constraintBottom_toBottomOf="@+id/tail"
+            app:layout_constraintEnd_toEndOf="@+id/tail"
+            app:layout_constraintStart_toStartOf="@+id/tail"
+            app:layout_constraintTop_toTopOf="@+id/tail" />
+        <ImageView
+            android:id="@+id/middle_floor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ship_middle_floor"
+            app:layout_constraintBottom_toBottomOf="@+id/middle"
+            app:layout_constraintEnd_toEndOf="@+id/middle"
+            app:layout_constraintStart_toStartOf="@+id/middle"
+            app:layout_constraintTop_toTopOf="@+id/middle" />
+        <ImageView
+            android:id="@+id/head_floor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ship_head_floor"
+            app:layout_constraintBottom_toBottomOf="@id/head"
+            app:layout_constraintEnd_toEndOf="@id/head"
+            app:layout_constraintStart_toStartOf="@id/head"
+            app:layout_constraintTop_toTopOf="@id/head" />
+        <ImageView
+            android:id="@+id/connectors_left"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-5dp"
+            android:src="@drawable/ship_connectors_left"
+
+            app:layout_constraintBottom_toBottomOf="@id/tail"
+            app:layout_constraintStart_toEndOf="@id/tail"
+            app:layout_constraintTop_toTopOf="@id/tail" />
+        <ImageView
+            android:id="@+id/connectors_right"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-9dp"
+            android:src="@drawable/ship_connectors_right"
+
+            app:layout_constraintBottom_toBottomOf="@id/head"
+            app:layout_constraintStart_toEndOf="@id/middle"
+            app:layout_constraintTop_toTopOf="@id/head"
+            />
+
+        <!--Interior-->
+        <ImageView
+            android:id="@+id/engine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ship_engine"
+            app:layout_constraintBottom_toBottomOf="@+id/tail"
+            app:layout_constraintEnd_toEndOf="@+id/tail"
+            app:layout_constraintStart_toStartOf="@+id/tail"
+            app:layout_constraintTop_toTopOf="@+id/tail" />
+        <ImageView
+            android:id="@+id/top_left"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7.5dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ship_side_left"
+            app:layout_constraintStart_toStartOf="@+id/middle"
+            app:layout_constraintTop_toTopOf="@+id/middle" />
+        <ImageView
+            android:id="@+id/bottom_left"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7.5dp"
+            android:layout_marginBottom="5dp"
+            android:rotationX="180"
+            android:src="@drawable/ship_side_left"
+            app:layout_constraintBottom_toBottomOf="@+id/middle"
+            app:layout_constraintStart_toStartOf="@+id/middle" />
+        <ImageView
+            android:id="@+id/top_right"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="7.5dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ship_side_right"
+            app:layout_constraintEnd_toEndOf="@+id/middle"
+            app:layout_constraintTop_toTopOf="@+id/middle" />
+        <ImageView
+            android:id="@+id/bottom_right"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="7.5dp"
+            android:layout_marginBottom="5dp"
+            android:rotationX="180"
+            android:src="@drawable/ship_side_right"
+            app:layout_constraintBottom_toBottomOf="@+id/middle"
+            app:layout_constraintEnd_toEndOf="@+id/middle" />
+        <ImageView
+            android:id="@+id/middle_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ship_middle_left"
+            android:layout_marginStart="7.5dp"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_left"
+            app:layout_constraintStart_toStartOf="@+id/middle"
+            app:layout_constraintTop_toBottomOf="@+id/top_left" />
+        <ImageView
+            android:id="@+id/middle_right"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="7.5dp"
+            android:src="@drawable/ship_middle_right"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_right"
+            app:layout_constraintEnd_toEndOf="@+id/middle"
+            app:layout_constraintTop_toBottomOf="@+id/top_right" />
+        <ImageView
+            android:id="@+id/top_center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ship_top_center"
+            app:layout_constraintEnd_toStartOf="@+id/top_right"
+            app:layout_constraintStart_toEndOf="@+id/top_left"
+            app:layout_constraintTop_toTopOf="@+id/middle" />
+
+        <ImageView
+            android:id="@+id/bottom_center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:src="@drawable/ship_top_center"
+            app:layout_constraintBottom_toBottomOf="@+id/middle"
+            app:layout_constraintEnd_toStartOf="@+id/bottom_right"
+            app:layout_constraintStart_toEndOf="@+id/bottom_left" />
+
+        <include
+            layout="@layout/center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/middle"
+            app:layout_constraintEnd_toEndOf="@id/middle"
+            app:layout_constraintStart_toStartOf="@id/middle"
+            app:layout_constraintTop_toTopOf="@id/middle" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources >
+    <style name="ship_center" xmlns:android="http://schemas.android.com/apk/res/android">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="layout_constraintDimensionRatio">1.569</item>
+    </style>
+    <declare-styleable name="planet_color_scheme">
+        <attr name="one" format="color" />
+        <attr name="two" format="color" />
+        <attr name="three" format="color" />
+        <attr name="four" format="color" />
+        <attr name="five" format="color" />
+        <attr name="six" format="color" />
+        <attr name="seven" format="color" />
+        <attr name="eight" format="color" />
+        <attr name="nine" format="color" />
+        <attr name="ten" format="color" />
+    </declare-styleable>
+        <style name="blue_planet_color_scheme">
+            <item name="one">   #FF815EA8</item>
+            <item name="two">   #FF715295</item>
+            <item name="three"> #FF9B8FBB</item>
+            <item name="four">  #FF7F6EAE</item>
+            <item name="five">  #FF8A76BC</item>
+            <item name="six">   #FF8456A9</item>
+            <item name="seven"> #FF6B4F84</item>
+            <item name="eight"> #FF7A69A7</item>
+            <item name="nine">  #FF8D77AB</item>
+            <item name="ten">   #FF8B6AA4</item>
+        </style>
+        <style name="green_planet_color_scheme">
+            <item name="one">   #FF325F76</item>
+            <item name="two">   #FF73A393</item>
+            <item name="three"> #FF8DC2A2</item>
+            <item name="four">  #FF60AF80</item>
+            <item name="five">  #FF53A4A4</item>
+            <item name="six">   #FF93C8A8</item>
+            <item name="seven"> #FF68AAAA</item>
+            <item name="eight"> #FF8EADB9</item>
+            <item name="nine">  #FF4EAEB2</item>
+            <item name="ten">   #FF6696AA</item>
+        </style>
+        <style name="yellow_planet_color_scheme">
+            <item name="one">   #FFA23731</item>
+            <item name="two">   #FFB75F53</item>
+            <item name="three"> #FFE4AC92</item>
+            <item name="four">  #FFC88C74</item>
+            <item name="five">  #FF80483C</item>
+            <item name="six">   #FFC9904C</item>
+            <item name="seven"> #FFE4B584</item>
+            <item name="eight"> #FF7C4230</item>
+            <item name="nine">  #FF8C8F25</item>
+            <item name="ten">   #FFD25B35</item>
+        </style>
+</resources>
