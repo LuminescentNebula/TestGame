@@ -25,7 +25,6 @@ public class PrisonersContainer implements PrisonerMenuListener {
         @Override
         public void run() {
             updateAll();
-            Log.d("MyTag", "Метод запущен");
             handler.postDelayed(this, 1000);
         }
     };
@@ -91,9 +90,12 @@ public class PrisonersContainer implements PrisonerMenuListener {
 
     @Override
     public void feedPrisoner(int amount) {
-        if (!getDisplayedPrisoner().changeHunger(amount)) {
-            updateData(getDisplayedPrisoner());
-            if (inventoryContainer.changeFood(-1) == 0) {
+        Prisoner prisoner=getDisplayedPrisoner();
+        prisoner.changeHunger(amount);
+        if (!prisoner.isDead()) {
+            updateData(prisoner);
+            inventoryContainer.changeFood(-1);
+            if (inventoryContainer.getFood() == 0) {
                 prisonerContainerListener.setButtonActivated(false);
             }
         }

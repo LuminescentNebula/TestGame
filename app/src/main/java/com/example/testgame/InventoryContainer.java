@@ -40,9 +40,8 @@ public class InventoryContainer{
         fuel+=amount;
         updateTopBar();
     }
-    public int changeFood(int amount) {
+    public void changeFood(int amount) {
         food+=amount;
         updateTopBar();
-        return food;
     }
 }

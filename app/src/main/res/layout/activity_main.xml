@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:hasClickableChildren="true"
+        android:background="@color/space"
         app:maxZoom="5"
         app:maxZoomType="realZoom"
         app:minZoom="0.5"

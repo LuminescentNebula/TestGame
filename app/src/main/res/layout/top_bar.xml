@@ -4,6 +4,7 @@
     android:layout_height="match_parent">
     <TextView
         android:id="@+id/fuel"
+        style="@style/text"
         android:background="@color/menu"
         android:layout_width="90dp"
         android:layout_height="36dp"
@@ -11,6 +12,7 @@
     </TextView>
     <TextView
         android:id="@+id/food"
+        style="@style/text"
         android:background="@color/menu"
         android:layout_width="90dp"
         android:layout_height="36dp"

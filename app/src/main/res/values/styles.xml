@@ -54,4 +54,9 @@
             <item name="nine">  #FF8C8F25</item>
             <item name="ten">   #FFD25B35</item>
         </style>
+
+    <style name="text">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/xolonium_regular</item>
+    </style>
 </resources>

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -19,6 +20,7 @@ public class Game extends AppCompatActivity{
     private final String TAG = "GAME";
     private Ship ship;
     private StarMap starMap;
+
     private FragmentManager fragmentManager;
     private PrisonerMenu prisonerMenu = new PrisonerMenu();
     private TopBar topBar = new TopBar();
@@ -27,7 +29,8 @@ public class Game extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        //Turning off dark theme
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.activity_main);
         // Hiding status bar
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -37,6 +40,7 @@ public class Game extends AppCompatActivity{
         int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
+        super.onCreate(savedInstanceState);
 
         ship=new Ship();
         fragmentManager=getSupportFragmentManager();

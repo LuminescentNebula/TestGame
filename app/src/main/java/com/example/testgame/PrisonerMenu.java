@@ -1,7 +1,6 @@
 package com.example.testgame;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +14,11 @@ import com.example.testgame.interfaces.PrisonerMenuListener;
 
 public class PrisonerMenu extends Fragment implements PrisonerContainerListener {
 
-    private View view;
     private TextView first;
     private TextView second;
     private TextView third;
 
     private PrisonerMenuListener prisonerMenuListener;
-    private Button leftButton;
-    private Button rightButton;
     private Button centerButton;
 
 
@@ -30,34 +26,17 @@ public class PrisonerMenu extends Fragment implements PrisonerContainerListener 
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        view= inflater.inflate(R.layout.prisoner_menu, container, false);
+        View view = inflater.inflate(R.layout.prisoner_menu, container, false);
         first = view.findViewById(R.id.first_text);
         second = view.findViewById(R.id.second_text);
         third = view.findViewById(R.id.third_text);
-        leftButton=view.findViewById(R.id.button_left);
-        rightButton=view.findViewById(R.id.button_right);
-        centerButton=view.findViewById(R.id.button_center);
+        centerButton= view.findViewById(R.id.button_center);
 
         //Todo: добавить изображение персонажа
 
-        rightButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                prisonerMenuListener.changeDisplayedPrisoner(true);
-            }
-        });
-        leftButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                prisonerMenuListener.changeDisplayedPrisoner(false);
-            }
-        });
-        centerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                prisonerMenuListener.feedPrisoner(10);
-            }
-        });
+        view.findViewById(R.id.button_right).setOnClickListener(v -> prisonerMenuListener.changeDisplayedPrisoner(true));
+        view.findViewById(R.id.button_left).setOnClickListener(v -> prisonerMenuListener.changeDisplayedPrisoner(false));
+        centerButton.setOnClickListener(v -> prisonerMenuListener.feedPrisoner(10));
 
         return view;
     }

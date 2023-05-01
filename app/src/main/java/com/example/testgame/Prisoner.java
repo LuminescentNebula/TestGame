@@ -57,11 +57,11 @@ public class Prisoner{
         Log.i("DELTA",String.valueOf(-delta));
         if (hunger<=0){
             changeHealth( -delta);
-            Log.i("LIVE",String.valueOf(health));
+            //Log.i("LIVE",String.valueOf(health));
         }
         else {
             changeHunger( -delta);
-            Log.i("DYING",String.valueOf(hunger));
+            //Log.i("DYING",String.valueOf(hunger));
         }
     }
 
@@ -73,15 +73,12 @@ public class Prisoner{
             }
         }
     }
-    public boolean changeHunger(Integer delta) {
+    public void changeHunger(Integer delta) {
         if (!isDead()) {
             hunger = (hunger + delta);
             if (hunger > maxHunger) {
                 hunger = maxHunger;
             }
-            return true;
-        } else {
-            return false;
         }
     }
     public void changeStress(Integer delta) {

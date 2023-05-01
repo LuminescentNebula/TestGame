@@ -4,6 +4,7 @@ public class Ship {
     private PrisonersContainer prisonersContainer;
     private WeaponContainer weaponContainer;
 
+    private Sector sector;
     private InventoryContainer inventoryContainer;
     private Ships type=Ships.BLOB;
 

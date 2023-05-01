@@ -12,30 +12,27 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.3"
-        android:textColor="@color/black"
-        android:fontFamily="@font/xolonium_regular"
         app:layout_constraintBottom_toTopOf="@id/second_text"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/text" />
 
     <TextView
         android:id="@+id/second_text"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.3"
-        android:textColor="@color/black"
-        android:fontFamily="@font/xolonium_regular"
         app:layout_constraintTop_toBottomOf="@id/first_text"
-        app:layout_constraintBottom_toTopOf="@id/third_text"/>
+        app:layout_constraintBottom_toTopOf="@id/third_text"
+        style="@style/text" />
 
     <TextView
         android:id="@+id/third_text"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.3"
-        android:textColor="@color/black"
-        android:fontFamily="@font/xolonium_regular"
         app:layout_constraintTop_toBottomOf="@id/second_text"
-        app:layout_constraintBottom_toTopOf="@id/button_right"/>
+        app:layout_constraintBottom_toTopOf="@id/button_right"
+        style="@style/text" />
 
     <Button
         android:id="@+id/button_left"
