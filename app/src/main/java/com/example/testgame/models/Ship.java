@@ -1,4 +1,6 @@
-package com.example.testgame;
+package com.example.testgame.models;
+
+import com.example.testgame.data.Ships;
 
 public class Ship {
     private PrisonersContainer prisonersContainer;
@@ -11,6 +13,7 @@ public class Ship {
     public Ship() {
         prisonersContainer=new PrisonersContainer();
         inventoryContainer=new InventoryContainer();
+        weaponContainer=new WeaponContainer();
         prisonersContainer.setInventoryContainer(inventoryContainer);
         //TODO:Удалить позже
         inventoryContainer.setFood(10);

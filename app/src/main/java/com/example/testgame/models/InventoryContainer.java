@@ -1,4 +1,4 @@
-package com.example.testgame;
+package com.example.testgame.models;
 
 import com.example.testgame.interfaces.InventoryContainerListener;
 

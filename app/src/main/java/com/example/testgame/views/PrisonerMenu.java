@@ -1,4 +1,4 @@
-package com.example.testgame;
+package com.example.testgame.views;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.testgame.models.Prisoner;
+import com.example.testgame.R;
 import com.example.testgame.interfaces.PrisonerContainerListener;
 import com.example.testgame.interfaces.PrisonerMenuListener;
 
@@ -18,10 +20,9 @@ public class PrisonerMenu extends Fragment implements PrisonerContainerListener 
     private TextView second;
     private TextView third;
 
+
     private PrisonerMenuListener prisonerMenuListener;
     private Button centerButton;
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -59,5 +60,13 @@ public class PrisonerMenu extends Fragment implements PrisonerContainerListener 
 
     public void setPrisonerMenuListener(PrisonerMenuListener prisonerMenuListener) {
         this.prisonerMenuListener=prisonerMenuListener;
+    }
+
+    public void setVisibility(boolean visible){
+        if (!visible) {
+            getView().setVisibility(View.GONE);
+        } else {
+            getView().setVisibility(View.VISIBLE);
+        }
     }
 }

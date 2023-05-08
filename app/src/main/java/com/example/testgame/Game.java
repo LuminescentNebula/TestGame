@@ -1,6 +1,5 @@
 package com.example.testgame;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,27 +10,35 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.example.testgame.databinding.TopBarBinding;
+import com.example.testgame.data.JSONSaver;
+import com.example.testgame.models.Ship;
+import com.example.testgame.models.StarMapContainer;
+import com.example.testgame.views.BottomBar;
+import com.example.testgame.views.PrisonerMenu;
+import com.example.testgame.views.ShipView;
+import com.example.testgame.views.StarMapView;
+import com.example.testgame.views.TopBar;
 
 
 public class Game extends AppCompatActivity{
     private JSONSaver jsonSaver;
 
     private final String TAG = "GAME";
-    private Ship ship;
-    private StarMap starMap;
 
+    private StarMapContainer starMapContainer;
+    private StarMapView starMapView;
+
+    private Ship ship;
     private FragmentManager fragmentManager;
-    private PrisonerMenu prisonerMenu = new PrisonerMenu();
-    private TopBar topBar = new TopBar();
-    private BottomBar bottomBar = new BottomBar();
-    private Fragment currentRight;
+    private PrisonerMenu prisonerMenu;
+    private TopBar topBar;
+    private BottomBar bottomBar;
+    private ShipView shipView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //Turning off dark theme
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        setContentView(R.layout.activity_main);
         // Hiding status bar
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -42,9 +49,25 @@ public class Game extends AppCompatActivity{
         decorView.setSystemUiVisibility(uiOptions);
         super.onCreate(savedInstanceState);
 
+        setContentView(R.layout.activity_main);
+
         ship=new Ship();
+        prisonerMenu = new PrisonerMenu();
+        topBar = new TopBar();
+        bottomBar = new BottomBar();
+        shipView=new ShipView();
+
+        starMapContainer=new StarMapContainer();
+        starMapView=new StarMapView(starMapContainer.getMap());
+
         fragmentManager=getSupportFragmentManager();
+
         if (savedInstanceState == null) {
+            fragmentManager.beginTransaction()
+                    .addToBackStack("Ship")
+                    .setReorderingAllowed(true)
+                    .add(R.id.layout,shipView)
+                    .commit();
             fragmentManager.beginTransaction()
                     .setReorderingAllowed(true)
                     .add(R.id.right_menu, prisonerMenu)
@@ -58,7 +81,28 @@ public class Game extends AppCompatActivity{
                     .add(R.id.bottom_bar, bottomBar)
                     .commit();
         }
+
+        fragmentManager.addOnBackStackChangedListener(() -> {
+
+//            bottomBar.setVisibility(true);
+//            topBar.setVisibility(true);
+//            prisonerMenu.setVisibility(true);
+        });
+
+        getSupportFragmentManager().setFragmentResultListener("StarMap", this, (requestKey, bundle) -> {
+            bottomBar.setVisibility(false);
+            topBar.setVisibility(false);
+            prisonerMenu.setVisibility(false);
+
+            getSupportFragmentManager().beginTransaction()
+                    .addToBackStack("StarMap")
+                    .setReorderingAllowed(true)
+                    .replace(R.id.layout, starMapView)
+                    .commit();
+        });
     }
+
+
 
     @Override
     protected void onStart() {

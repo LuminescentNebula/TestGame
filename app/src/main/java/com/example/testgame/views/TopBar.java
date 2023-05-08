@@ -1,4 +1,4 @@
-package com.example.testgame;
+package com.example.testgame.views;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,11 +8,13 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.testgame.R;
 import com.example.testgame.interfaces.InventoryContainerListener;
 
 public class TopBar extends Fragment implements InventoryContainerListener {
     private TextView fuel;
     private TextView food;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -33,4 +35,11 @@ public class TopBar extends Fragment implements InventoryContainerListener {
         food.setText("Food: "+amount);
     }
 
+    public void setVisibility(boolean visible){
+        if (!visible) {
+            getView().setVisibility(View.GONE);
+        } else {
+            getView().setVisibility(View.VISIBLE);
+        }
+    }
 }

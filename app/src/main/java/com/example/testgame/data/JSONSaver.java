@@ -1,7 +1,5 @@
-package com.example.testgame;
+package com.example.testgame.data;
 
-
-import com.google.gson.Gson;
 
 public class JSONSaver {
 

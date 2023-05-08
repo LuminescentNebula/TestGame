@@ -1,7 +1,6 @@
-package com.example.testgame;
+package com.example.testgame.models;
 
 import android.os.Handler;
-import android.util.Log;
 
 import com.example.testgame.interfaces.PrisonerContainerListener;
 import com.example.testgame.interfaces.PrisonerMenuListener;
@@ -31,7 +30,7 @@ public class PrisonersContainer implements PrisonerMenuListener {
 
     public PrisonersContainer() {
         lastUpdate = Calendar.getInstance().getTime();
-        handler.postDelayed(runnable, 1000);
+        //handler.postDelayed(runnable, 1000);
     }
 
     public void updateAll(){

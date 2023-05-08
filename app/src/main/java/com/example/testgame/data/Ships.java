@@ -1,4 +1,4 @@
-package com.example.testgame;
+package com.example.testgame.data;
 
 public enum Ships {
     BLOB("Blob",3);
