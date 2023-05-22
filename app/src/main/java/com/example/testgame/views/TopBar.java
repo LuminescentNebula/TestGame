@@ -10,8 +10,9 @@ import androidx.fragment.app.Fragment;
 
 import com.example.testgame.R;
 import com.example.testgame.interfaces.InventoryContainerListener;
+import com.example.testgame.interfaces.ShowHideInterface;
 
-public class TopBar extends Fragment implements InventoryContainerListener {
+public class TopBar extends Fragment implements InventoryContainerListener, ShowHideInterface {
     private TextView fuel;
     private TextView food;
 
@@ -35,11 +36,18 @@ public class TopBar extends Fragment implements InventoryContainerListener {
         food.setText("Food: "+amount);
     }
 
-    public void setVisibility(boolean visible){
-        if (!visible) {
-            getView().setVisibility(View.GONE);
-        } else {
-            getView().setVisibility(View.VISIBLE);
-        }
+    @Override
+    public void hide() {
+        getParentFragmentManager().beginTransaction()
+                .setReorderingAllowed(true)
+                .hide(this)
+                .commit();
+    }
+    @Override
+    public void show() {
+        getParentFragmentManager().beginTransaction()
+                .setReorderingAllowed(true)
+                .show(this)
+                .commit();
     }
 }

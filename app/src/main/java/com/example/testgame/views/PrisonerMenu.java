@@ -1,6 +1,7 @@
 package com.example.testgame.views;
 
 import android.os.Bundle;
+import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,12 +10,13 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.testgame.interfaces.ShowHideInterface;
 import com.example.testgame.models.Prisoner;
 import com.example.testgame.R;
 import com.example.testgame.interfaces.PrisonerContainerListener;
 import com.example.testgame.interfaces.PrisonerMenuListener;
 
-public class PrisonerMenu extends Fragment implements PrisonerContainerListener {
+public class PrisonerMenu extends Fragment implements PrisonerContainerListener, ShowHideInterface {
 
     private TextView first;
     private TextView second;
@@ -32,6 +34,10 @@ public class PrisonerMenu extends Fragment implements PrisonerContainerListener 
         second = view.findViewById(R.id.second_text);
         third = view.findViewById(R.id.third_text);
         centerButton= view.findViewById(R.id.button_center);
+
+        TransitionInflater transitionInflater = TransitionInflater.from(requireContext());
+        setEnterTransition(transitionInflater.inflateTransition(R.transition.slide_right));
+        setExitTransition(transitionInflater.inflateTransition(R.transition.slide_right));
 
         //Todo: добавить изображение персонажа
 
@@ -62,11 +68,19 @@ public class PrisonerMenu extends Fragment implements PrisonerContainerListener 
         this.prisonerMenuListener=prisonerMenuListener;
     }
 
-    public void setVisibility(boolean visible){
-        if (!visible) {
-            getView().setVisibility(View.GONE);
-        } else {
-            getView().setVisibility(View.VISIBLE);
-        }
+    @Override
+    public void hide() {
+        getParentFragmentManager().beginTransaction()
+                .setReorderingAllowed(true)
+                .hide(this)
+                .commit();
+    }
+
+    @Override
+    public void show(){
+        getParentFragmentManager().beginTransaction()
+                .setReorderingAllowed(true)
+                .show(this)
+                .commit();
     }
 }

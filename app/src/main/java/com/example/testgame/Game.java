@@ -7,12 +7,11 @@ import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.testgame.data.JSONSaver;
 import com.example.testgame.models.Ship;
-import com.example.testgame.models.StarMapContainer;
+import com.example.testgame.models.StarMapGenerator;
 import com.example.testgame.views.BottomBar;
 import com.example.testgame.views.PrisonerMenu;
 import com.example.testgame.views.ShipView;
@@ -25,7 +24,6 @@ public class Game extends AppCompatActivity{
 
     private final String TAG = "GAME";
 
-    private StarMapContainer starMapContainer;
     private StarMapView starMapView;
 
     private Ship ship;
@@ -43,10 +41,12 @@ public class Game extends AppCompatActivity{
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         // Hiding navigation bar
-        View decorView = getWindow().getDecorView();
-        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_FULLSCREEN;
-        decorView.setSystemUiVisibility(uiOptions);
+        int flags = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_FULLSCREEN;
+        flags |= View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION |
+                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+        getWindow().getDecorView().setSystemUiVisibility(flags);
+
+
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
@@ -57,28 +57,26 @@ public class Game extends AppCompatActivity{
         bottomBar = new BottomBar();
         shipView=new ShipView();
 
-        starMapContainer=new StarMapContainer();
-        starMapView=new StarMapView(starMapContainer.getMap());
+        starMapView=new StarMapView(StarMapGenerator.generate(1),ship);
 
         fragmentManager=getSupportFragmentManager();
 
         if (savedInstanceState == null) {
             fragmentManager.beginTransaction()
-                    .addToBackStack("Ship")
                     .setReorderingAllowed(true)
-                    .add(R.id.layout,shipView)
+                    .add(R.id.layout,shipView,"Ship")
                     .commit();
             fragmentManager.beginTransaction()
                     .setReorderingAllowed(true)
-                    .add(R.id.right_menu, prisonerMenu)
+                    .add(R.id.right_menu, prisonerMenu,"PrisonerMenu")
                     .commit();
             fragmentManager.beginTransaction()
                     .setReorderingAllowed(true)
-                    .add(R.id.top_bar, topBar)
+                    .add(R.id.top_bar, topBar,"TopBar")
                     .commit();
             fragmentManager.beginTransaction()
                     .setReorderingAllowed(true)
-                    .add(R.id.bottom_bar, bottomBar)
+                    .add(R.id.bottom_bar, bottomBar,"BottomBar")
                     .commit();
         }
 
@@ -90,19 +88,18 @@ public class Game extends AppCompatActivity{
         });
 
         getSupportFragmentManager().setFragmentResultListener("StarMap", this, (requestKey, bundle) -> {
-            bottomBar.setVisibility(false);
-            topBar.setVisibility(false);
-            prisonerMenu.setVisibility(false);
+            bottomBar.hide();
+            topBar.hide();
+            prisonerMenu.hide();
 
-            getSupportFragmentManager().beginTransaction()
+            fragmentManager.beginTransaction()
                     .addToBackStack("StarMap")
                     .setReorderingAllowed(true)
                     .replace(R.id.layout, starMapView)
                     .commit();
         });
+
     }
-
-
 
     @Override
     protected void onStart() {

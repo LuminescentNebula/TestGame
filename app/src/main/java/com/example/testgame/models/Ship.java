@@ -1,8 +1,9 @@
 package com.example.testgame.models;
 
 import com.example.testgame.data.Ships;
+import com.example.testgame.interfaces.StarMapListener;
 
-public class Ship {
+public class Ship implements StarMapListener {
     private PrisonersContainer prisonersContainer;
     private WeaponContainer weaponContainer;
 
@@ -37,5 +38,10 @@ public class Ship {
 
     public InventoryContainer getInventoryContainer() {
         return inventoryContainer;
+    }
+
+    @Override
+    public void onSectorChanged(Sector sector) {
+        this.sector=sector;
     }
 }

@@ -9,8 +9,9 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 import com.example.testgame.R;
+import com.example.testgame.interfaces.ShowHideInterface;
 
-public class BottomBar extends Fragment {
+public class BottomBar extends Fragment implements ShowHideInterface {
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -21,14 +22,35 @@ public class BottomBar extends Fragment {
             Log.i("BottomBar","First");
             getParentFragmentManager().setFragmentResult("StarMap",new Bundle());
         });
+        view.findViewById(R.id.button2).setOnClickListener(v -> {
+            if (getParentFragmentManager().findFragmentByTag("PrisonerMenu").isHidden()) {
+                getParentFragmentManager().beginTransaction()
+                        .setReorderingAllowed(true)
+                        .show(getParentFragmentManager().findFragmentByTag("PrisonerMenu"))
+                        .commit();
+            } else {
+                getParentFragmentManager().beginTransaction()
+                        .setReorderingAllowed(true)
+                        .hide(getParentFragmentManager().findFragmentByTag("PrisonerMenu"))
+                        .commit();
+            }
+        });
         return view;
     }
 
-    public void setVisibility(boolean visible){
-        if (!visible) {
-            getView().setVisibility(View.GONE);
-        } else {
-            getView().setVisibility(View.VISIBLE);
-        }
+    @Override
+    public void hide() {
+        getParentFragmentManager().beginTransaction()
+                .setReorderingAllowed(true)
+                .hide(this)
+                .commit();
+    }
+
+    @Override
+    public void  show(){
+        getParentFragmentManager().beginTransaction()
+                .setReorderingAllowed(true)
+                .show(this)
+                .commit();
     }
 }

@@ -6,24 +6,18 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class StarMapContainer {
+public  class  StarMapGenerator {
 
-    private final int minimumDistance = 170;
-    private final int number = 75;
-    private final int areaWidth = 3120;
-    private final int areaHeight = 1440;
-
-    private ArrayList<Sector> map;
-
-    public StarMapContainer() {
-        map = generate();
-    }
-
-    private ArrayList<Sector> generate() {
-        Random random = new Random();
+    private static final int minimumDistance = 170;
+    private static final int number = 75;
+    private static final int areaWidth = 3120;
+    private static final int areaHeight = 1440;
+    public static ArrayList<Sector> generate(long seed) {
+        Random random = new Random(seed);
         Sector firstPoint = new Sector(random.nextInt(areaWidth), random.nextInt(areaHeight));
 
         ArrayList<Sector> activePoints = new ArrayList<>();
+
         activePoints.add(firstPoint);
         int n = 0;
         while (activePoints.size() < number && n < 400000) {
@@ -42,14 +36,14 @@ public class StarMapContainer {
                 }
             }
             if (isDistributed) {
+                for (int i: point.connections){
+                    activePoints.get(i).add(activePoints.size());
+                }
+                point.fill();
                 activePoints.add(point);
             }
         }
         return activePoints;
-    }
-
-    public ArrayList<Sector> getMap() {
-        return map;
     }
 }
 
