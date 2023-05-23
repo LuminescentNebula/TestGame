@@ -1,6 +1,7 @@
 package com.example.testgame.views;
 
 import android.content.res.Resources;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,10 +25,8 @@ public class StarMapView extends Fragment implements StarMapDrawerListener {
     public StarMapSelector selector;
     ArrayList<Sector> map;
     StarMapListener starMapListener;
-    LinearLayout.LayoutParams selectorParams= new LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.WRAP_CONTENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT
-    );
+
+
 
     public StarMapView(ArrayList<Sector> map, StarMapListener starMapListener){
         this.map=map;

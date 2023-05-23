@@ -12,15 +12,19 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class Sector {
-    @Getter
+
+    public static final int STAR = 1;
+    public static final int DOT = 2;
+    public static final int BLACK = 3;
+    public static final int NOVA = 4;
+
+
+
     float hungerMod,stressMod,damageMod;
 
-    @Getter
     private String name;
-    @Getter
-    private int x,y,size,color;
+    private int x,y,size,color,img;
     private static final Random random= new Random();
-    @Getter
     ArrayList<Integer> connections= new ArrayList<>();
 
 //    PlaceHolder event;
@@ -64,6 +68,7 @@ public class Sector {
         name=generateName();
         this.size=10+random.nextInt(20);
         color=generateColor();
+        img=Sector.STAR;
     }
 
 
@@ -94,4 +99,45 @@ public class Sector {
 
     //for preview
     public void getResources(){}
+
+
+    public float getHungerMod() {
+        return hungerMod;
+    }
+
+    public float getStressMod() {
+        return stressMod;
+    }
+
+    public float getDamageMod() {
+        return damageMod;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public int getImg() {
+        return img;
+    }
+
+    public ArrayList<Integer> getConnections() {
+        return connections;
+    }
 }

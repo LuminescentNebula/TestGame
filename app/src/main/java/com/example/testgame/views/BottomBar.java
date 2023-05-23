@@ -23,6 +23,7 @@ public class BottomBar extends Fragment implements ShowHideInterface {
             getParentFragmentManager().setFragmentResult("StarMap",new Bundle());
         });
         view.findViewById(R.id.button2).setOnClickListener(v -> {
+            //Todo: перенести в
             if (getParentFragmentManager().findFragmentByTag("PrisonerMenu").isHidden()) {
                 getParentFragmentManager().beginTransaction()
                         .setReorderingAllowed(true)

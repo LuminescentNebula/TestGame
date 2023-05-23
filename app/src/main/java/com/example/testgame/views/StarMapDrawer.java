@@ -1,10 +1,11 @@
 package com.example.testgame.views;
 
 import android.content.Context;
+import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.DashPathEffect;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -27,6 +28,7 @@ public class StarMapDrawer extends SurfaceView implements SurfaceHolder.Callback
     private float x,y;
     private float xMod,yMod;
 
+
     public StarMapDrawer(Context context,ArrayList<Sector> map,StarMapDrawerListener starMapDrawerListener) {
         super(context);
         this.starMapDrawerListener=starMapDrawerListener;
@@ -34,6 +36,8 @@ public class StarMapDrawer extends SurfaceView implements SurfaceHolder.Callback
         holder = getHolder();
         holder.addCallback(this);
         this.map=map;
+
+
     }
 
     @Override
@@ -91,22 +95,28 @@ public class StarMapDrawer extends SurfaceView implements SurfaceHolder.Callback
     private class BallThread extends Thread {
         private boolean running = true;
         private int rotation=0;
-        private Paint circles = new Paint();
-        private Paint lines = new Paint();
-        private Paint select = new Paint();
+        private Paint circles, circles_blur,lines,select;
+
 
         public BallThread(){
+            circles = new Paint();
             circles.setAntiAlias(true);
             circles.setColor(Color.WHITE);
 
+            circles_blur = new Paint();
+            circles_blur.setAntiAlias(true);
+            circles_blur.setColor(Color.WHITE);
+            circles_blur.setMaskFilter(new BlurMaskFilter(8, BlurMaskFilter.Blur.NORMAL));
+
+            lines = new Paint();
             lines.setStyle(Paint.Style.FILL_AND_STROKE);
             lines.setColor(0x88FFFFFF);
             lines.setStrokeWidth(8);
 
+            select = new Paint();
             select.setStyle(Paint.Style.STROKE);
-            select.setColor(getResources().getColor(R.color.important,null));
+            select.setColor(0xFFFF2A00);
             select.setStrokeWidth(5);
-            select.setPathEffect(new DashPathEffect(new float[]{25, 10}, 0));
         }
 
         @Override
@@ -131,12 +141,27 @@ public class StarMapDrawer extends SurfaceView implements SurfaceHolder.Callback
                                 }
                             }
                             for (Sector point: map){
-                                circles.setColor(point.getColor());
-                                canvas.drawCircle(
-                                        point.getX()+xMod,
-                                        point.getY()+yMod,
-                                        point.getSize(),
-                                        circles);
+                                if (point.getImg()== Sector.STAR) {
+                                    Path path = new Path();
+                                    path.moveTo(point.getX()+xMod, point.getY()+yMod);
+                                    path.rLineTo(0.15f * point.getSize(), 1.4975f * point.getSize());
+                                    path.rLineTo(1.4975f * point.getSize(), 0.15f * point.getSize());
+                                    path.rLineTo(-1.4975f * point.getSize(), 0.15f * point.getSize());
+                                    path.rLineTo(-0.15f * point.getSize(), 1.5f * point.getSize());
+                                    path.rLineTo(-0.15f * point.getSize(), -1.5f * point.getSize());
+                                    path.rLineTo(-1.5f * point.getSize(), -0.15f * point.getSize());
+                                    path.rLineTo(1.5f * point.getSize(), -0.15f * point.getSize());
+                                    path.rLineTo(0.15f * point.getSize(), -1.4975f * point.getSize());
+                                    path.close();
+                                    canvas.drawPath(path, circles_blur);
+                                    canvas.drawPath(path, circles);
+                                } else {
+                                    circles.setColor(point.getColor());
+                                    circles_blur.setColor(point.getColor());
+                                    canvas.drawCircle(point.getX()+xMod, point.getY()+yMod, point.getSize(), circles_blur);
+                                    canvas.drawCircle(point.getX()+xMod, point.getY()+yMod, point.getSize() - 1, circles);
+                                }
+
                             }
                             canvas.restore();
                             if (selected >= 0) {
