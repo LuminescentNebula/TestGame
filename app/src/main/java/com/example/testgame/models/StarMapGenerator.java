@@ -22,7 +22,7 @@ public  class  StarMapGenerator {
         int n = 0;
         while (activePoints.size() < number && n < 400000) {
             n++;
-            Log.i("Tag", "Generating" + n);
+            //Log.i("Tag", "Generating" + n);
             Sector point = new Sector(
                     Math.min(Math.max(40 + random.nextInt(15), random.nextInt(areaWidth)), areaWidth - 40 - random.nextInt(15)),
                     Math.min(Math.max(40 + random.nextInt(15), random.nextInt(areaHeight)), areaHeight - 40 - random.nextInt(15)));

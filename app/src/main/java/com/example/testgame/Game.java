@@ -81,17 +81,12 @@ public class Game extends AppCompatActivity{
         }
 
         fragmentManager.addOnBackStackChangedListener(() -> {
-
-//            bottomBar.setVisibility(true);
-//            topBar.setVisibility(true);
-//            prisonerMenu.setVisibility(true);
-        });
-
-        getSupportFragmentManager().setFragmentResultListener("StarMap", this, (requestKey, bundle) -> {
             bottomBar.hide();
             topBar.hide();
             prisonerMenu.hide();
+        });
 
+        getSupportFragmentManager().setFragmentResultListener("StarMap", this, (requestKey, bundle) -> {
             fragmentManager.beginTransaction()
                     .addToBackStack("StarMap")
                     .setReorderingAllowed(true)

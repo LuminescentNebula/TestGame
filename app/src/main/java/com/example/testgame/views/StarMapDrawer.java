@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.Log;
@@ -95,7 +96,10 @@ public class StarMapDrawer extends SurfaceView implements SurfaceHolder.Callback
     private class BallThread extends Thread {
         private boolean running = true;
         private int rotation=0;
-        private Paint circles, circles_blur,lines,select;
+        private Paint circles, circlesBlur,lines,select;
+
+        private final float   starCorner=1f;
+        private final float starSide=6f;
 
 
         public BallThread(){
@@ -103,10 +107,10 @@ public class StarMapDrawer extends SurfaceView implements SurfaceHolder.Callback
             circles.setAntiAlias(true);
             circles.setColor(Color.WHITE);
 
-            circles_blur = new Paint();
-            circles_blur.setAntiAlias(true);
-            circles_blur.setColor(Color.WHITE);
-            circles_blur.setMaskFilter(new BlurMaskFilter(8, BlurMaskFilter.Blur.NORMAL));
+            circlesBlur = new Paint();
+            circlesBlur.setAntiAlias(true);
+            circlesBlur.setColor(Color.WHITE);
+            circlesBlur.setMaskFilter(new BlurMaskFilter(8, BlurMaskFilter.Blur.NORMAL));
 
             lines = new Paint();
             lines.setStyle(Paint.Style.FILL_AND_STROKE);
@@ -117,6 +121,7 @@ public class StarMapDrawer extends SurfaceView implements SurfaceHolder.Callback
             select.setStyle(Paint.Style.STROKE);
             select.setColor(0xFFFF2A00);
             select.setStrokeWidth(5);
+            select.setPathEffect(new DashPathEffect(new float[]{25, 10}, 0));
         }
 
         @Override
@@ -129,41 +134,43 @@ public class StarMapDrawer extends SurfaceView implements SurfaceHolder.Callback
                         canvas.drawColor(getResources().getColor(R.color.space,null));
                         canvas.save();
 
-                        if (map!=null) {
-                            for (Sector point : map) {
-                                for (int i : point.getConnections()) {
-                                    canvas.drawLine(
-                                            point.getX()+xMod,
-                                            point.getY()+yMod,
-                                            map.get(i).getX()+xMod,
-                                            map.get(i).getY()+yMod,
-                                            lines);
-                                }
+                        for (Sector point : map) {
+                            for (int i : point.getConnections()) {
+                                canvas.drawLine(
+                                        point.getX()+xMod,
+                                        point.getY()+yMod,
+                                        map.get(i).getX()+xMod,
+                                        map.get(i).getY()+yMod,
+                                        lines);
                             }
+                        }
+                        canvas.restore();
+                        if (map!=null) {
                             for (Sector point: map){
                                 if (point.getImg()== Sector.STAR) {
                                     Path path = new Path();
-                                    path.moveTo(point.getX()+xMod, point.getY()+yMod);
-                                    path.rLineTo(0.15f * point.getSize(), 1.4975f * point.getSize());
-                                    path.rLineTo(1.4975f * point.getSize(), 0.15f * point.getSize());
-                                    path.rLineTo(-1.4975f * point.getSize(), 0.15f * point.getSize());
-                                    path.rLineTo(-0.15f * point.getSize(), 1.5f * point.getSize());
-                                    path.rLineTo(-0.15f * point.getSize(), -1.5f * point.getSize());
-                                    path.rLineTo(-1.5f * point.getSize(), -0.15f * point.getSize());
-                                    path.rLineTo(1.5f * point.getSize(), -0.15f * point.getSize());
-                                    path.rLineTo(0.15f * point.getSize(), -1.4975f * point.getSize());
+                                    path.moveTo(point.getX()+xMod, point.getY()+yMod-(starSide * point.getSize() / 4));
+                                    path.rLineTo(starCorner * point.getSize() / 4, starSide * point.getSize() / 4);
+                                    path.rLineTo(starSide * point.getSize() / 4, starCorner * point.getSize() / 4);
+                                    path.rLineTo(-starSide * point.getSize() / 4, starCorner * point.getSize() / 4);
+                                    path.rLineTo(-starCorner * point.getSize() / 4, starSide * point.getSize() / 4);
+                                    path.rLineTo(-starCorner * point.getSize() / 4, -starSide * point.getSize() / 4);
+                                    path.rLineTo(-starSide * point.getSize() / 4, -starCorner * point.getSize() / 4);
+                                    path.rLineTo(starSide * point.getSize() / 4, -starCorner * point.getSize() / 4);
+                                    path.rLineTo(starCorner * point.getSize() / 4, -starSide * point.getSize() / 4);
                                     path.close();
-                                    canvas.drawPath(path, circles_blur);
+
+                                    circlesBlur.setColor(point.getColor());
+                                    circles.setColor(point.getColor());
+                                    canvas.drawPath(path, circlesBlur);
                                     canvas.drawPath(path, circles);
                                 } else {
                                     circles.setColor(point.getColor());
-                                    circles_blur.setColor(point.getColor());
-                                    canvas.drawCircle(point.getX()+xMod, point.getY()+yMod, point.getSize(), circles_blur);
+                                    circlesBlur.setColor(point.getColor());
+                                    canvas.drawCircle(point.getX()+xMod, point.getY()+yMod, point.getSize(), circlesBlur);
                                     canvas.drawCircle(point.getX()+xMod, point.getY()+yMod, point.getSize() - 1, circles);
                                 }
-
                             }
-                            canvas.restore();
                             if (selected >= 0) {
                                 canvas.rotate(rotation,
                                         map.get(selected).getX()+xMod,

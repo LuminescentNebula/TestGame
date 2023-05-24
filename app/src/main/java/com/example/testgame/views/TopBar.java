@@ -43,6 +43,16 @@ public class TopBar extends Fragment implements InventoryContainerListener, Show
                 .hide(this)
                 .commit();
     }
+
+    @Override
+    public void change() {
+        if (isHidden()){
+            show();
+        } else {
+            hide();
+        }
+    }
+
     @Override
     public void show() {
         getParentFragmentManager().beginTransaction()

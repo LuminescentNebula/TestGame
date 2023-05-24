@@ -68,7 +68,8 @@ public class Sector {
         name=generateName();
         this.size=10+random.nextInt(20);
         color=generateColor();
-        img=Sector.STAR;
+        img= random.nextInt(5)+1;
+        Log.d("TAG", String.valueOf(img));
     }
 
 
@@ -91,7 +92,7 @@ public class Sector {
                 (random.nextInt(255) << 16) |
                 (random.nextInt(255) <<  8) |
                 (random.nextInt(255));
-        Log.d("Color", String.valueOf(color));
+        //Log.d("Color", String.valueOf(color));
     return color;
     }
 

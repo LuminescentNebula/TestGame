@@ -77,6 +77,15 @@ public class PrisonerMenu extends Fragment implements PrisonerContainerListener,
     }
 
     @Override
+    public void change() {
+        if (isHidden()){
+            show();
+        } else {
+            hide();
+        }
+    }
+
+    @Override
     public void show(){
         getParentFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)

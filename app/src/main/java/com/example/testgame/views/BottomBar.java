@@ -48,6 +48,15 @@ public class BottomBar extends Fragment implements ShowHideInterface {
     }
 
     @Override
+    public void change() {
+        if (isHidden()){
+            show();
+        } else {
+            hide();
+        }
+    }
+
+    @Override
     public void  show(){
         getParentFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)

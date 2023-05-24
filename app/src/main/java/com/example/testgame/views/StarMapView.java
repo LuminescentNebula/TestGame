@@ -27,7 +27,6 @@ public class StarMapView extends Fragment implements StarMapDrawerListener {
     StarMapListener starMapListener;
 
 
-
     public StarMapView(ArrayList<Sector> map, StarMapListener starMapListener){
         this.map=map;
         this.starMapListener=starMapListener;
