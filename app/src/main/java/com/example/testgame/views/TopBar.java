@@ -1,9 +1,12 @@
 package com.example.testgame.views;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -23,6 +26,7 @@ public class TopBar extends Fragment implements InventoryContainerListener, Show
         View view= inflater.inflate(R.layout.top_bar, container, false);
         fuel=view.findViewById(R.id.fuel);
         food=view.findViewById(R.id.food);
+
 
         return view;
     }

@@ -2,7 +2,6 @@ package com.example.testgame.views;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -22,7 +21,7 @@ public class StarMapSelector extends LinearLayout {
     public StarMapSelector(Context context) {
         super(context);
         inflate(getContext(), R.layout.selector, (ViewGroup) getRootView());
-        name = findViewById(R.id.name);
+        name = findViewById(R.id.sector_name);
         findViewById(R.id.start).setOnClickListener(v -> starMapListener.onSectorChanged(sector));
     }
 

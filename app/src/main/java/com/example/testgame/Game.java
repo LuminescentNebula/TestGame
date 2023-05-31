@@ -5,8 +5,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.testgame.data.JSONSaver;
@@ -19,7 +19,7 @@ import com.example.testgame.views.StarMapView;
 import com.example.testgame.views.TopBar;
 
 
-public class Game extends AppCompatActivity{
+public class Game extends FragmentActivity {
     private JSONSaver jsonSaver;
 
     private final String TAG = "GAME";
@@ -68,7 +68,7 @@ public class Game extends AppCompatActivity{
                     .commit();
             fragmentManager.beginTransaction()
                     .setReorderingAllowed(true)
-                    .add(R.id.right_menu, prisonerMenu,"PrisonerMenu")
+                    .add(R.id.side_menu, prisonerMenu,"PrisonerMenu")
                     .commit();
             fragmentManager.beginTransaction()
                     .setReorderingAllowed(true)
@@ -78,11 +78,12 @@ public class Game extends AppCompatActivity{
                     .setReorderingAllowed(true)
                     .add(R.id.bottom_bar, bottomBar,"BottomBar")
                     .commit();
+
         }
 
         fragmentManager.addOnBackStackChangedListener(() -> {
-            bottomBar.hide();
-            topBar.hide();
+            bottomBar.change();
+            topBar.change();
             prisonerMenu.hide();
         });
 

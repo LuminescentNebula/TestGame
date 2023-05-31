@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="magic_text_view">
+        <attr name="inner_shadow_color" format="color"/>
+        <attr name="inner_shadow_radius" format="dimension"/>
+        <attr name="inner_shadow_dx" format="dimension"/>
+        <attr name="inner_shadow_dy" format="dimension"/>
+
+        <attr name="outer_shadow_color" format="color"/>
+        <attr name="outer_shadow_radius" format="dimension"/>
+        <attr name="outer_shadow_dx" format="dimension"/>
+        <attr name="outer_shadow_dy" format="dimension"/>
+
+        <attr name="typeface" format="string" />
+
+        <attr name="mtv_foreground" format="reference|color"/>
+        <attr name="mtv_background" format="reference|color"/>
+
+        <attr name="stroke_width" format="dimension" />
+        <attr name="stroke_miter" format="dimension" />
+        <attr name="stroke_color" format="color" />
+        <attr name="stroke_join_style">
+            <enum name="miter" value="0" />
+            <enum name="bevel" value="1" />
+            <enum name="round" value="2" />
+        </attr>
+    </declare-styleable>
+</resources>

@@ -18,8 +18,6 @@ public class Sector {
     public static final int BLACK = 3;
     public static final int NOVA = 4;
 
-
-
     float hungerMod,stressMod,damageMod;
 
     private String name;
@@ -64,9 +62,8 @@ public class Sector {
     }
 
     public void fill() {
-        //Call generate methods
         name=generateName();
-        this.size=10+random.nextInt(20);
+        this.size=15+random.nextInt(15);
         color=generateColor();
         img= random.nextInt(5)+1;
         Log.d("TAG", String.valueOf(img));
@@ -87,13 +84,18 @@ public class Sector {
     }
     private int generateColor(){
         //TODO:Проанализировать полученные параметры и выбрать цвет
-        int color =
-                (255 << 24) |
-                (random.nextInt(255) << 16) |
-                (random.nextInt(255) <<  8) |
-                (random.nextInt(255));
+        int[] colors= {0xFF9DB4FF,0xFFA2B9FF,0xFFA7BCFF,0xFFAABFFF,0xFFBACCFF,
+         0xFFC0D1FF,0xFFCAD8FF,0xFFC4E8FF,0xFFEDEEFF,0xFFFFF9F9,
+         0xFFFFF5EC,0xFFFFF4E8,0xFFFFF1DF,0xFFFFEBD1,0xFFFFD7AE,
+         0xFFFFC690,0xFFFBE690,0xFFFFBE7F,0xFFFFBB7B};
+//        int color =
+//                (255 << 24) |
+//                (random.nextInt(255) << 16) |
+//                (random.nextInt(255) <<  8) |
+//                (random.nextInt(20));
+
         //Log.d("Color", String.valueOf(color));
-    return color;
+    return colors[random.nextInt(19)];
     }
 
 

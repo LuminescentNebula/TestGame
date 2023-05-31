@@ -10,8 +10,10 @@
     <color name="transparent_white">#88FFFFFF</color>
     <color name="transparent">#00000000</color>
     <color name="space">#FF272744</color>
-    <color name="menu">#FFFBF5EF</color>
-    <color name="undermenu">#FFC4C4C4</color>
+    <color name="menu_first">#FFFBF5EF</color>
+    <color name="menu_second">#FFF7E0C3</color>
+    <color name="menu_third">#FFC4C4C4</color>
     <color name="important">#FFFF2A00</color>
+    <color name="good">#FF5DDB6E</color>
 
 </resources>

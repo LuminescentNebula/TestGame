@@ -1,67 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/menu"
+    android:background="@color/menu_first"
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/first_text"
+        android:id="@+id/prisoner_name"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.3"
-        app:layout_constraintBottom_toTopOf="@id/second_text"
+        android:layout_weight="0.07"
+        style="@style/headline"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:background="@drawable/name_plank"/>
+    <com.example.testgame.views.PrisonerDrawer
+        android:id="@+id/prisoner_drawer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.53"/>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/prisoner_stats"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="0.3">
+
+    <com.example.testgame.other.StatBar
+        android:id="@id/prisoner_health"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        style="@style/text" />
-
-    <TextView
-        android:id="@+id/second_text"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.3"
-        app:layout_constraintTop_toBottomOf="@id/first_text"
-        app:layout_constraintBottom_toTopOf="@id/third_text"
-        style="@style/text" />
-
-    <TextView
-        android:id="@+id/third_text"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.3"
-        app:layout_constraintTop_toBottomOf="@id/second_text"
-        app:layout_constraintBottom_toTopOf="@id/button_right"
-        style="@style/text" />
-
-    <Button
-        android:id="@+id/button_left"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@color/undermenu"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/third_text"/>
-
-    <Button
-        android:id="@+id/button_center"
-        android:layout_width="wrap_content"
+        app:layout_constraintVertical_bias="0.25"/>
+    <com.example.testgame.other.StatBar
+        android:id="@id/prisoner_hunger"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:backgroundTint="@color/undermenu"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button_right"
-        app:layout_constraintStart_toEndOf="@+id/button_left"
-        app:layout_constraintTop_toBottomOf="@id/third_text" />
-
-    <Button
-        android:id="@+id/button_right"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@color/undermenu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/third_text"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.25"/>
+    <com.example.testgame.other.StatBar
+        android:id="@id/prisoner_stress"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.75"
+        app:layout_constraintTop_toTopOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.flexbox.FlexboxLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:justifyContent="space_between"
+        android:orientation="horizontal">
+        <Button
+            android:text="left"
+            android:id="@+id/button_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/menu_third" />
+
+        <Button
+            android:text="update"
+            android:id="@+id/button_center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/menu_third" />
+
+        <Button
+            android:text="right"
+            android:id="@+id/button_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/menu_third"/>
+    </com.google.android.flexbox.FlexboxLayout>
+</LinearLayout>

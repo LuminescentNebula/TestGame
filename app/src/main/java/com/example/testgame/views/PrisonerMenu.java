@@ -1,61 +1,61 @@
 package com.example.testgame.views;
 
 import android.os.Bundle;
-import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.fragment.app.Fragment;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 
-import com.example.testgame.interfaces.ShowHideInterface;
 import com.example.testgame.models.Prisoner;
 import com.example.testgame.R;
 import com.example.testgame.interfaces.PrisonerContainerListener;
 import com.example.testgame.interfaces.PrisonerMenuListener;
+import com.example.testgame.other.StatBar;
 
-public class PrisonerMenu extends Fragment implements PrisonerContainerListener, ShowHideInterface {
+public class PrisonerMenu extends SideMenu implements PrisonerContainerListener {
 
-    private TextView first;
-    private TextView second;
-    private TextView third;
-
-
+    private TextView name;
+    private StatBar health,hunger,stress;
     private PrisonerMenuListener prisonerMenuListener;
     private Button centerButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.prisoner_menu, container, false);
-        first = view.findViewById(R.id.first_text);
-        second = view.findViewById(R.id.second_text);
-        third = view.findViewById(R.id.third_text);
+        name = view.findViewById(R.id.prisoner_name);
         centerButton= view.findViewById(R.id.button_center);
-
-        TransitionInflater transitionInflater = TransitionInflater.from(requireContext());
-        setEnterTransition(transitionInflater.inflateTransition(R.transition.slide_right));
-        setExitTransition(transitionInflater.inflateTransition(R.transition.slide_right));
-
-        //Todo: добавить изображение персонажа
 
         view.findViewById(R.id.button_right).setOnClickListener(v -> prisonerMenuListener.changeDisplayedPrisoner(true));
         view.findViewById(R.id.button_left).setOnClickListener(v -> prisonerMenuListener.changeDisplayedPrisoner(false));
         centerButton.setOnClickListener(v -> prisonerMenuListener.feedPrisoner(10));
 
+        health = view.findViewById(R.id.prisoner_health);
+        hunger = view.findViewById(R.id.prisoner_hunger);
+        hunger.rotate(StatBar.Right);
+        stress = view.findViewById(R.id.prisoner_stress);
+        stress.rotate(StatBar.Center);
+        health.setAmount(100);
+        hunger.setAmount(100);
+        stress.setAmount(100);
         return view;
     }
 
     public void setPrisoner(Prisoner prisoner){
-        first.setText(prisoner.getName());
-        second.setText("Hunger: "+prisoner.getHunger());
-        third.setText("Health: "+prisoner.getHealth());
+        name.setText(prisoner.getName());
+        hunger.setAmount(prisoner.getHunger());
+        health.setAmount(prisoner.getHealth());
     }
 
     @Override
     public void onPrisonerContainerUpdated(Prisoner prisoner) {
+        hunger.setMaxAmount(prisoner.getMaxHunger());
+        health.setMaxAmount(prisoner.getMaxHealth());
         setPrisoner(prisoner);
     }
 

@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 public class StarMapDrawer extends SurfaceView implements SurfaceHolder.Callback {
     private SurfaceHolder holder;
-    private BallThread ballThread;
+    private StarMapThread starMapThread;
     private int selected;
     private ArrayList<Sector> map;
     private StarMapDrawerListener starMapDrawerListener;
@@ -37,8 +37,6 @@ public class StarMapDrawer extends SurfaceView implements SurfaceHolder.Callback
         holder = getHolder();
         holder.addCallback(this);
         this.map=map;
-
-
     }
 
     @Override
@@ -51,8 +49,8 @@ public class StarMapDrawer extends SurfaceView implements SurfaceHolder.Callback
         xMod=width/3120f;
         yMod=height/1440f;
 
-        ballThread = new BallThread();
-        ballThread.start();
+        starMapThread = new StarMapThread();
+        starMapThread.start();
     }
 
     @Override
@@ -60,7 +58,7 @@ public class StarMapDrawer extends SurfaceView implements SurfaceHolder.Callback
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-        ballThread.stopThread();
+        starMapThread.stopThread();
     }
 
     @Override
@@ -83,6 +81,7 @@ public class StarMapDrawer extends SurfaceView implements SurfaceHolder.Callback
         } else if (event.getAction()==MotionEvent.ACTION_MOVE) {
             xMod+=event.getX()-x;
             yMod+=event.getY()-y;
+            //TODO: Максимальное ограничение сдвига
             xMod=Math.min(75,Math.max(xMod,-width));
             yMod=Math.min(75,Math.max(yMod,-height));
             //Log.d("w/h", getWidth() +" "+ getHeight());
@@ -93,16 +92,15 @@ public class StarMapDrawer extends SurfaceView implements SurfaceHolder.Callback
         return true;
     }
 
-    private class BallThread extends Thread {
+    private class StarMapThread extends Thread {
         private boolean running = true;
         private int rotation=0;
         private Paint circles, circlesBlur,lines,select;
 
-        private final float   starCorner=1f;
-        private final float starSide=6f;
+        private final float starSide=4/3f;
 
 
-        public BallThread(){
+        public StarMapThread(){
             circles = new Paint();
             circles.setAntiAlias(true);
             circles.setColor(Color.WHITE);
@@ -114,7 +112,7 @@ public class StarMapDrawer extends SurfaceView implements SurfaceHolder.Callback
 
             lines = new Paint();
             lines.setStyle(Paint.Style.FILL_AND_STROKE);
-            lines.setColor(0x88FFFFFF);
+            lines.setColor(0x44FFFFFF);
             lines.setStrokeWidth(8);
 
             select = new Paint();
@@ -149,17 +147,22 @@ public class StarMapDrawer extends SurfaceView implements SurfaceHolder.Callback
                             for (Sector point: map){
                                 if (point.getImg()== Sector.STAR) {
                                     Path path = new Path();
-                                    path.moveTo(point.getX()+xMod, point.getY()+yMod-(starSide * point.getSize() / 4));
-                                    path.rLineTo(starCorner * point.getSize() / 4, starSide * point.getSize() / 4);
-                                    path.rLineTo(starSide * point.getSize() / 4, starCorner * point.getSize() / 4);
-                                    path.rLineTo(-starSide * point.getSize() / 4, starCorner * point.getSize() / 4);
-                                    path.rLineTo(-starCorner * point.getSize() / 4, starSide * point.getSize() / 4);
-                                    path.rLineTo(-starCorner * point.getSize() / 4, -starSide * point.getSize() / 4);
-                                    path.rLineTo(-starSide * point.getSize() / 4, -starCorner * point.getSize() / 4);
-                                    path.rLineTo(starSide * point.getSize() / 4, -starCorner * point.getSize() / 4);
-                                    path.rLineTo(starCorner * point.getSize() / 4, -starSide * point.getSize() / 4);
+                                    path.moveTo(point.getX()+xMod,
+                                            point.getY()+yMod-(
+                                                    (starSide+starSide/3)
+                                                            * point.getSize()));
+                                    //TODO: Нормальный размер звезд
+                                    float side=starSide * point.getSize();
+                                    float corner=(starSide/3) * point.getSize();
+                                    path.rLineTo(corner, side);
+                                    path.rLineTo(side, corner);
+                                    path.rLineTo(-side, corner);
+                                    path.rLineTo(-corner, side);
+                                    path.rLineTo(-corner, -side);
+                                    path.rLineTo(-side, -corner);
+                                    path.rLineTo(side, -corner);
+                                    path.rLineTo(corner, -side);
                                     path.close();
-
                                     circlesBlur.setColor(point.getColor());
                                     circles.setColor(point.getColor());
                                     canvas.drawPath(path, circlesBlur);

@@ -104,6 +104,18 @@ public class Prisoner{
         this.stress = stress;
     }
 
+    public Integer getMaxHealth() {
+        return maxHealth;
+    }
+
+    public Integer getMaxHunger() {
+        return maxHunger;
+    }
+
+    public Integer getMaxStress() {
+        return maxStress;
+    }
+
     public boolean isDead() {
         return health==0;
     }
