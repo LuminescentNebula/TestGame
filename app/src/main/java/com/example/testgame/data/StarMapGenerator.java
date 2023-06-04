@@ -1,7 +1,9 @@
-package com.example.testgame.models;
+package com.example.testgame.data;
 
 
 import android.util.Log;
+
+import com.example.testgame.models.Sector;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -36,7 +38,7 @@ public  class  StarMapGenerator {
                 }
             }
             if (isDistributed) {
-                for (int i: point.connections){
+                for (int i: point.getConnections()){
                     activePoints.get(i).add(activePoints.size());
                 }
                 point.fill();

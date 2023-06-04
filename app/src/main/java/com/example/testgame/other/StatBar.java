@@ -33,6 +33,7 @@ public class StatBar extends ConstraintLayout {
     ImageView bar_minus,bar_plus;
 
     public StatBar(@NonNull Context context, @Nullable AttributeSet attrs) {
+        //TODO:Иконки
         super(context, attrs);
         inflate(getContext(), R.layout.stat,this);
         amount=100;
@@ -60,6 +61,7 @@ public class StatBar extends ConstraintLayout {
         ConstraintLayout.LayoutParams  layoutParams= (LayoutParams) bar_minus.getLayoutParams();
         layoutParams.matchConstraintPercentWidth=(maxAmount-amount)/100f;
         //TODO:Анимация измнения значения
+        //TODO: Анимация уменьшения счётчика -1 + пошатывания хп
         bar_minus.setLayoutParams(layoutParams);
         bar_plus.setBackgroundTintList(ColorStateList.valueOf(ColorUtils.blendARGB(red,green,
                 (float) Math.min(1,amount/maxAmount+0.3))));

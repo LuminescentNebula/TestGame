@@ -145,8 +145,9 @@ public class StarMapDrawer extends SurfaceView implements SurfaceHolder.Callback
                         canvas.restore();
                         if (map!=null) {
                             for (Sector point: map){
-                                if (point.getImg()== Sector.STAR) {
+                                if (point.getType()== Sector.STAR) {
                                     Path path = new Path();
+                                    //TODO: Offset and Matrix size
                                     path.moveTo(point.getX()+xMod,
                                             point.getY()+yMod-(
                                                     (starSide+starSide/3)

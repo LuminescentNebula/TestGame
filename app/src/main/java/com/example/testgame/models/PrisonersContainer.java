@@ -13,8 +13,8 @@ import java.util.List;
 public class PrisonersContainer implements PrisonerMenuListener {
     Date lastUpdate;
     Integer displayedIndex;
-    private PrisonerContainerListener prisonerContainerListener;
-    private InventoryContainer inventoryContainer;
+    private transient PrisonerContainerListener prisonerContainerListener;
+    private transient InventoryContainer inventoryContainer;
 
     List<Prisoner> list = Arrays.asList(new Prisoner(10,10,0,100,"John"),
             new Prisoner(10,10,0,100,"Kevin"));

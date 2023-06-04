@@ -1,15 +1,11 @@
 package com.example.testgame.models;
 
-import android.graphics.Color;
 import android.util.Log;
 
 import com.example.testgame.PlaceHolder;
 
 import java.util.ArrayList;
 import java.util.Random;
-
-import lombok.Getter;
-import lombok.Setter;
 
 public class Sector {
 
@@ -21,15 +17,16 @@ public class Sector {
     float hungerMod,stressMod,damageMod;
 
     private String name;
-    private int x,y,size,color,img;
+    private int x,y,size,color, type;
     private static final Random random= new Random();
     ArrayList<Integer> connections= new ArrayList<>();
+    ArrayList<Planet> planets;
+
 
 //    PlaceHolder event;
 //    //x,y
 //    ArrayList<PlaceHolder> activities;
-//    //x,r
-//    ArrayList<PlaceHolder> planets;
+
 //    //x,y
 //    ArrayList<PlaceHolder> enemies;
 
@@ -65,16 +62,17 @@ public class Sector {
         name=generateName();
         this.size=15+random.nextInt(15);
         color=generateColor();
-        img= random.nextInt(5)+1;
-        Log.d("TAG", String.valueOf(img));
+        type = random.nextInt(5)+1;
+        Log.d("TAG", String.valueOf(type));
+        planets=generatePlanets();
     }
 
 
     private PlaceHolder generateEvents(){
         return new PlaceHolder();
     }
-    private PlaceHolder generatePlanets(){
-        return new PlaceHolder();
+    private ArrayList<Planet> generatePlanets(){
+        return new ArrayList<Planet>();
     }
 
     private String generateName(){
@@ -88,13 +86,6 @@ public class Sector {
          0xFFC0D1FF,0xFFCAD8FF,0xFFC4E8FF,0xFFEDEEFF,0xFFFFF9F9,
          0xFFFFF5EC,0xFFFFF4E8,0xFFFFF1DF,0xFFFFEBD1,0xFFFFD7AE,
          0xFFFFC690,0xFFFBE690,0xFFFFBE7F,0xFFFFBB7B};
-//        int color =
-//                (255 << 24) |
-//                (random.nextInt(255) << 16) |
-//                (random.nextInt(255) <<  8) |
-//                (random.nextInt(20));
-
-        //Log.d("Color", String.valueOf(color));
     return colors[random.nextInt(19)];
     }
 
@@ -136,8 +127,8 @@ public class Sector {
         return color;
     }
 
-    public int getImg() {
-        return img;
+    public int getType() {
+        return type;
     }
 
     public ArrayList<Integer> getConnections() {

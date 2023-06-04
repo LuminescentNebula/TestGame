@@ -6,7 +6,6 @@ import com.example.testgame.interfaces.StarMapListener;
 public class Ship implements StarMapListener {
     private PrisonersContainer prisonersContainer;
     private WeaponContainer weaponContainer;
-
     private Sector sector;
     private InventoryContainer inventoryContainer;
     private Ships type=Ships.BLOB;

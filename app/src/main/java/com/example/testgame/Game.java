@@ -11,12 +11,13 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.testgame.data.JSONSaver;
 import com.example.testgame.models.Ship;
-import com.example.testgame.models.StarMapGenerator;
+import com.example.testgame.data.StarMapGenerator;
 import com.example.testgame.views.BottomBar;
 import com.example.testgame.views.PrisonerMenu;
 import com.example.testgame.views.ShipView;
 import com.example.testgame.views.StarMapView;
 import com.example.testgame.views.TopBar;
+import com.google.gson.annotations.SerializedName;
 
 
 public class Game extends FragmentActivity {
@@ -27,12 +28,22 @@ public class Game extends FragmentActivity {
     private StarMapView starMapView;
 
     private Ship ship;
+
     private FragmentManager fragmentManager;
     private PrisonerMenu prisonerMenu;
     private TopBar topBar;
     private BottomBar bottomBar;
     private ShipView shipView;
 
+
+    //TODO: 1. Sector map
+    //TODO: . PlanetGeneration
+    //TODO: . PrisonersDrawer
+    //TODO: . Dialog window
+    //TODO: . JSONSaver
+    //TODO: . Ресурсы
+    //TODO: . Scanning menu
+    //TODO: . Animations
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //Turning off dark theme

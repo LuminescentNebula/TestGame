@@ -1,14 +1,15 @@
 package com.example.testgame.models;
 
+import com.example.testgame.PlaceHolder;
 import com.example.testgame.interfaces.InventoryContainerListener;
+
+import java.util.Dictionary;
 
 public class InventoryContainer{
     private int fuel=0;
     private int food=0;
-    private int material1=0;
-    private int material2=0;
-
-    private InventoryContainerListener inventoryContainerListener;
+    private Dictionary<String,PlaceHolder> materials;
+    private transient InventoryContainerListener inventoryContainerListener;
 
 
     public int getFuel() {

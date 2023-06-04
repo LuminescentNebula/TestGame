@@ -40,9 +40,6 @@ public class PrisonerMenu extends SideMenu implements PrisonerContainerListener 
         hunger.rotate(StatBar.Right);
         stress = view.findViewById(R.id.prisoner_stress);
         stress.rotate(StatBar.Center);
-        health.setAmount(100);
-        hunger.setAmount(100);
-        stress.setAmount(100);
         return view;
     }
 
