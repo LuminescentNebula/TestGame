@@ -8,21 +8,44 @@
     android:layout_weight="1"
     android:gravity="center"
     app:justifyContent="space_around"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="@drawable/bar"
+    android:padding="4dp">
 
     <ImageButton
         android:id="@+id/button1"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:src="@mipmap/ic_launcher"/>
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:background="@color/transparent"
+        android:src="@drawable/brain"/>
     <ImageButton
         android:id="@+id/button2"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:src="@mipmap/ic_launcher"/>
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:background="@color/transparent"
+        android:src="@drawable/electric"/>
     <ImageButton
         android:id="@+id/button3"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:src="@mipmap/ic_launcher"/>
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:background="@color/transparent"
+        android:src="@drawable/communication"/>
+    <ImageButton
+        android:id="@+id/button4"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:background="@color/transparent"
+        android:src="@drawable/workbench"/>
+    <ImageButton
+        android:id="@+id/button5"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:background="@color/transparent"
+        android:src="@drawable/prison"/>
+    <ImageButton
+        android:id="@+id/button6"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:background="@color/transparent"
+        android:src="@drawable/stars"/>
 </com.google.android.flexbox.FlexboxLayout>

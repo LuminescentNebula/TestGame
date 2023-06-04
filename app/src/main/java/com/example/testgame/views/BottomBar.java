@@ -20,26 +20,29 @@ public class BottomBar extends Fragment implements ShowHideInterface {
                              ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.bottom_bar, container, false);
 
-        view.findViewById(R.id.button1).setOnClickListener(v -> {
+        view.findViewById(R.id.button6).setOnClickListener(v -> {
             Log.i("BottomBar","First");
             getParentFragmentManager().setFragmentResult("StarMap",new Bundle());
         });
-        view.findViewById(R.id.button2).setOnClickListener(v -> {
-            //Todo: перенести в
-            if (getParentFragmentManager().findFragmentByTag("PrisonerMenu").isHidden()) {
-                getParentFragmentManager().beginTransaction()
-                        .setReorderingAllowed(true)
-                        .show(getParentFragmentManager().findFragmentByTag("PrisonerMenu"))
-                        .commit();
-            } else {
-                getParentFragmentManager().beginTransaction()
-                        .setReorderingAllowed(true)
-                        .hide(getParentFragmentManager().findFragmentByTag("PrisonerMenu"))
-                        .commit();
-            }
+        view.findViewById(R.id.button5).setOnClickListener(v -> {
+            sideMenuUse("PrisonerMenu");
         });
 
         return view;
+    }
+
+    private void sideMenuUse(String tag){
+        if (getParentFragmentManager().findFragmentByTag(tag).isHidden()) {
+            getParentFragmentManager().beginTransaction()
+                    .setReorderingAllowed(true)
+                    .show(getParentFragmentManager().findFragmentByTag(tag))
+                    .commit();
+        } else {
+            getParentFragmentManager().beginTransaction()
+                    .setReorderingAllowed(true)
+                    .hide(getParentFragmentManager().findFragmentByTag(tag))
+                    .commit();
+        }
     }
 
     @Override

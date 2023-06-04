@@ -8,9 +8,17 @@ import java.util.Dictionary;
 public class InventoryContainer{
     private int fuel=0;
     private int food=0;
+    private int energy=0;
     private Dictionary<String,PlaceHolder> materials;
     private transient InventoryContainerListener inventoryContainerListener;
 
+    public int getEnergy() {
+        return energy;
+    }
+
+    public void setEnergy(int energy) {
+        this.energy = energy;
+    }
 
     public int getFuel() {
         return fuel;
@@ -34,6 +42,7 @@ public class InventoryContainer{
 
     public void updateTopBar() {
         inventoryContainerListener.setFuel(fuel);
+        inventoryContainerListener.setEnergy(energy);
         inventoryContainerListener.setFood(food);
     }
 

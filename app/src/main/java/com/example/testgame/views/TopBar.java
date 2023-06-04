@@ -17,6 +17,7 @@ import com.example.testgame.interfaces.ShowHideInterface;
 
 public class TopBar extends Fragment implements InventoryContainerListener, ShowHideInterface {
     private TextView fuel;
+    private TextView energy;
     private TextView food;
 
 
@@ -25,19 +26,23 @@ public class TopBar extends Fragment implements InventoryContainerListener, Show
                              ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.top_bar, container, false);
         fuel=view.findViewById(R.id.fuel);
+        energy=view.findViewById(R.id.energy);
         food=view.findViewById(R.id.food);
-
-
         return view;
     }
 
     @Override
     public void setFuel(int amount){
-        fuel.setText("Fuel: "+amount);
+        fuel.setText(amount);
     }
     @Override
     public void setFood(int amount){
-        food.setText("Food: "+amount);
+        food.setText(amount);
+    }
+
+    @Override
+    public void setEnergy(int amount){
+        energy.setText(amount);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.example.testgame;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -68,7 +69,7 @@ public class Game extends FragmentActivity {
         bottomBar = new BottomBar();
         shipView=new ShipView();
 
-        starMapView=new StarMapView(StarMapGenerator.generate(1),ship);
+        new Handler().post(() -> starMapView=new StarMapView(StarMapGenerator.generate(1),ship));
 
         fragmentManager=getSupportFragmentManager();
 
