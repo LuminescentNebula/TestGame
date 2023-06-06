@@ -33,24 +33,27 @@ public class TopBar extends Fragment implements InventoryContainerListener, Show
 
     @Override
     public void setFuel(int amount){
-        fuel.setText(amount);
+        fuel.setText(String.valueOf(amount));
     }
     @Override
     public void setFood(int amount){
-        food.setText(amount);
+        food.setText(String.valueOf(amount));
     }
 
     @Override
     public void setEnergy(int amount){
-        energy.setText(amount);
+        energy.setText(String.valueOf(amount));
     }
 
     @Override
     public void hide() {
+        Log.d("TAG", "hide: TopBar");
         getParentFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
                 .hide(this)
                 .commit();
+        Log.d("TAG", String.valueOf(this.isHidden()));
+
     }
 
     @Override

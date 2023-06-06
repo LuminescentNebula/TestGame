@@ -44,6 +44,7 @@ public  class  StarMapGenerator {
                 point.fill();
                 activePoints.add(point);
             }
+            activePoints.get(0).fill();
         }
         return activePoints;
     }

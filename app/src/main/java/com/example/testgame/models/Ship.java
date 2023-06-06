@@ -42,5 +42,6 @@ public class Ship implements StarMapListener {
     @Override
     public void onSectorChanged(Sector sector) {
         this.sector=sector;
+        //notidy sector map
     }
 }

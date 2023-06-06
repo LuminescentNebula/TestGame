@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="48dp"
     android:paddingHorizontal="50dp"
-    android:layout_weight="1"
-    android:gravity="center"
+    android:gravity="center_vertical"
+    app:alignItems="center"
     app:justifyContent="space_around"
     android:orientation="horizontal"
     android:background="@drawable/bar"
@@ -46,6 +46,14 @@
         android:id="@+id/button6"
         android:layout_width="36dp"
         android:layout_height="36dp"
+        android:layout_marginEnd="-24dp"
         android:background="@color/transparent"
         android:src="@drawable/stars"/>
+    <ImageButton
+        android:id="@+id/hide"
+        android:layout_width="48dp"
+        android:layout_marginEnd="-24dp"
+        android:layout_height="match_parent"
+        android:background="@color/transparent"
+        android:src="@drawable/arrow"/>
 </com.google.android.flexbox.FlexboxLayout>

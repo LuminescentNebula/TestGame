@@ -71,7 +71,7 @@ public class StarMapDrawer extends SurfaceView implements SurfaceHolder.Callback
             for (int i = 0; i < map.size(); i++) {
                 if (Math.abs(event.getX() - (map.get(i).getX() + xMod)) < 48
                         && Math.abs(event.getY() - (map.get(i).getY() + yMod)) < 48) {
-                    Toast.makeText(getContext(), String.valueOf(i), Toast.LENGTH_SHORT).show();
+                    Log.d("Touch", String.valueOf(i));
                     selected = i;
                     break;
                 }

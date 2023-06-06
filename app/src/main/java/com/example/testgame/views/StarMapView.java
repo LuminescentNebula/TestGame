@@ -1,13 +1,10 @@
 package com.example.testgame.views;
 
-import android.content.res.Resources;
-import android.graphics.Paint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,8 +18,9 @@ import com.example.testgame.models.Sector;
 import java.util.ArrayList;
 
 public class StarMapView extends Fragment implements StarMapDrawerListener {
-    public StarMapDrawer surface;
-    public StarMapSelector selector;
+    StarMapDrawer surface;
+    StarMapSelector selector;
+    ImageButton backButton;
     ArrayList<Sector> map;
     StarMapListener starMapListener;
 
@@ -39,7 +37,6 @@ public class StarMapView extends Fragment implements StarMapDrawerListener {
                                                 ViewGroup.LayoutParams.MATCH_PARENT);
         surface.setLayoutParams(layoutParams);
         selector=new StarMapSelector(getContext());
-
         selector.setVisibility(false);
     }
 
@@ -49,10 +46,20 @@ public class StarMapView extends Fragment implements StarMapDrawerListener {
         inflate();
         view.addView(surface);
         view.addView(selector);
+        backButton = view.findViewById(R.id.back);
+        backButton.bringToFront();
         selector.setStarMapListener(starMapListener);
+        selector.setVisibility(true);
+        selector.setVisibility(false);
+        backButton.setOnClickListener(v -> onBackPressed());
+
         return view;
     }
 
+    @Override
+    public void onBackPressed() {
+        getParentFragmentManager().setFragmentResult("StarMapBack",new Bundle());
+    }
     @Override
     public void onSectorTouch(int i,float xMod,float yMod) {
         if (i>=0) {

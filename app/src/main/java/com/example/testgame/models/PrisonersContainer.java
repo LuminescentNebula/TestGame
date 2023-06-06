@@ -90,8 +90,8 @@ public class PrisonersContainer implements PrisonerMenuListener {
     @Override
     public void feedPrisoner(int amount) {
         Prisoner prisoner=getDisplayedPrisoner();
-        prisoner.changeHunger(amount);
-        if (!prisoner.isDead()) {
+        if (!prisoner.isDead()  && prisoner.getHunger()!=prisoner.getMaxHunger()) {
+            prisoner.changeHunger(amount);
             updateData(prisoner);
             inventoryContainer.changeFood(-1);
             if (inventoryContainer.getFood() == 0) {

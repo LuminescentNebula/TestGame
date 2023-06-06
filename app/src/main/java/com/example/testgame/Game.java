@@ -18,12 +18,9 @@ import com.example.testgame.views.PrisonerMenu;
 import com.example.testgame.views.ShipView;
 import com.example.testgame.views.StarMapView;
 import com.example.testgame.views.TopBar;
-import com.google.gson.annotations.SerializedName;
 
 
 public class Game extends FragmentActivity {
-    private JSONSaver jsonSaver;
-
     private final String TAG = "GAME";
 
     private StarMapView starMapView;
@@ -80,7 +77,7 @@ public class Game extends FragmentActivity {
                     .commit();
             fragmentManager.beginTransaction()
                     .setReorderingAllowed(true)
-                    .add(R.id.side_menu, prisonerMenu,"PrisonerMenu")
+                    .add(R.id.side_menu, prisonerMenu,"PrisonerMenu").hide(prisonerMenu)
                     .commit();
             fragmentManager.beginTransaction()
                     .setReorderingAllowed(true)
@@ -90,23 +87,34 @@ public class Game extends FragmentActivity {
                     .setReorderingAllowed(true)
                     .add(R.id.bottom_bar, bottomBar,"BottomBar")
                     .commit();
-
         }
 
-        fragmentManager.addOnBackStackChangedListener(() -> {
-            bottomBar.change();
-            topBar.change();
-            prisonerMenu.hide();
-        });
-
         getSupportFragmentManager().setFragmentResultListener("StarMap", this, (requestKey, bundle) -> {
+            prisonerMenu.hide();
+            topBar.hide();
+            bottomBar.hide();
+
             fragmentManager.beginTransaction()
-                    .addToBackStack("StarMap")
                     .setReorderingAllowed(true)
+                    .addToBackStack("StarMap")
                     .replace(R.id.layout, starMapView)
                     .commit();
-        });
 
+            Log.d("TAGbottom", String.valueOf(bottomBar.isHidden()));
+            Log.d("TAGtop", String.valueOf(topBar.isHidden()));
+
+
+        });
+        getSupportFragmentManager().setFragmentResultListener("StarMapBack", this, (requestKey, bundle) -> {
+            topBar.show();
+            bottomBar.show();
+
+            fragmentManager.clearBackStack("StarMap");
+            fragmentManager.beginTransaction()
+                    .setReorderingAllowed(true)
+                    .replace(R.id.layout, shipView)
+                    .commit();
+        });
     }
 
     @Override

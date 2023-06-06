@@ -59,34 +59,38 @@ public class Sector {
     }
 
     public void fill() {
-        name=generateName();
         this.size=15+random.nextInt(15);
-        color=generateColor();
         type = random.nextInt(5)+1;
         Log.d("TAG", String.valueOf(type));
-        planets=generatePlanets();
+
+        name = generateName();
+        generateStarColor();
+        generatePlanets();
     }
 
 
     private PlaceHolder generateEvents(){
         return new PlaceHolder();
     }
-    private ArrayList<Planet> generatePlanets(){
-        return new ArrayList<Planet>();
+    private void generatePlanets(){
+        planets=new ArrayList<Planet>();
+        for (int i=0;i < random.nextInt(3)+3;i++){
+            planets.add(new Planet(random,generateName()));
+        };
     }
 
     private String generateName(){
         //TODO:Сформировать словарь и по нему генерировать, Словарь в статичную перемнную
 
-        return "Сектор "+(1000+random.nextInt(8999));
+        return  "Сектор "+(1000+random.nextInt(8999));
     }
-    private int generateColor(){
+    private void generateStarColor(){
         //TODO:Проанализировать полученные параметры и выбрать цвет
         int[] colors= {0xFF9DB4FF,0xFFA2B9FF,0xFFA7BCFF,0xFFAABFFF,0xFFBACCFF,
          0xFFC0D1FF,0xFFCAD8FF,0xFFC4E8FF,0xFFEDEEFF,0xFFFFF9F9,
          0xFFFFF5EC,0xFFFFF4E8,0xFFFFF1DF,0xFFFFEBD1,0xFFFFD7AE,
          0xFFFFC690,0xFFFBE690,0xFFFFBE7F,0xFFFFBB7B};
-    return colors[random.nextInt(19)];
+    color= colors[random.nextInt(19)];
     }
 
 
@@ -94,6 +98,17 @@ public class Sector {
     //for preview
     public void getResources(){}
 
+    public ArrayList<Planet> getPlanets() {
+        return planets;
+    }
+
+    public Planet getPlanet(int i) {
+        return planets.get(i);
+    }
+
+    public int getPlanetsSize() {
+        return planets.size();
+    }
 
     public float getHungerMod() {
         return hungerMod;

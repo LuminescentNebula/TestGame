@@ -17,18 +17,12 @@
         android:gravity="center_vertical"
         android:layout_marginBottom="2dp"
         />
-    <LinearLayout
+    <SurfaceView
         android:id="@+id/planets"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="2dp">
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@drawable/planet1"/>
-
-    </LinearLayout>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginBottom="2dp"/>
 
     <com.google.android.flexbox.FlexboxLayout
         android:id="@+id/bottom"
