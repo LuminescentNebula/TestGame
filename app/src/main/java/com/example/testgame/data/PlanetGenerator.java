@@ -55,7 +55,7 @@ public class PlanetGenerator {
 
         public static void generate(@NonNull Canvas canvas, Planet planet) {
             //TODO: r
-            generate(canvas, planet.getSeed(), planet.getX(), planet.getR(), base_layers,
+            generate(canvas, planet.getSeed(), planet.getX(), planet.getY(), base_layers,
                     base_waves, 170f,
                     base_rotation);
         }

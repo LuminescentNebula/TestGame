@@ -9,18 +9,18 @@ public class Planet {
     public static final int ASTEROID = 3;
     public static final int STAR = 4;
 
-    private float x,r,rotation;
+    private float x, y,rotation;
     private int seed, type,size;
     private String name;
 
 
     public Planet(Random random,String name) {
         x=random.nextInt();
-        r=random.nextInt();
+        y =random.nextInt();
         type=GAS;//TODO: random
-        size= random.nextInt(120)+50;
+        size= random.nextInt(75)+75;
         seed= random.nextInt();
-        rotation=random.nextInt(360)-180;
+        rotation=random.nextInt(180);
         this.name=name; //TODO: Custom name generator?
     }
 
@@ -32,12 +32,12 @@ public class Planet {
         this.x = x;
     }
 
-    public float getR() {
-        return r;
+    public float getY() {
+        return y;
     }
 
-    public void setR(float r) {
-        this.r = r;
+    public void setY(float y) {
+        this.y = y;
     }
 
     public int getSeed() {

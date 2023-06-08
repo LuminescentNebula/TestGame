@@ -10,8 +10,6 @@ import android.graphics.Path;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
-import android.view.SurfaceView;
-import android.widget.Toast;
 
 import com.example.testgame.R;
 import com.example.testgame.interfaces.StarMapDrawerListener;
@@ -19,42 +17,26 @@ import com.example.testgame.models.Sector;
 
 import java.util.ArrayList;
 
-public class StarMapDrawer extends SurfaceView implements SurfaceHolder.Callback {
-    private SurfaceHolder holder;
+public class StarMapDrawer extends MovableDrawer {
     private StarMapThread starMapThread;
     private int selected;
     private ArrayList<Sector> map;
     private StarMapDrawerListener starMapDrawerListener;
-    private int width,height;
-    private float x,y;
-    private float xMod,yMod;
-
 
     public StarMapDrawer(Context context,ArrayList<Sector> map,StarMapDrawerListener starMapDrawerListener) {
         super(context);
         this.starMapDrawerListener=starMapDrawerListener;
-        setWillNotDraw(false);
-        holder = getHolder();
-        holder.addCallback(this);
         this.map=map;
     }
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
+        super.surfaceCreated(holder);
         selected=-1;
-
-        width=getWidth();
-        height=getHeight();
-
-        xMod=width/3120f;
-        yMod=height/1440f;
 
         starMapThread = new StarMapThread();
         starMapThread.start();
     }
-
-    @Override
-    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {}
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
@@ -63,10 +45,8 @@ public class StarMapDrawer extends SurfaceView implements SurfaceHolder.Callback
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        super.onTouchEvent(event);
         if (event.getAction() == MotionEvent.ACTION_DOWN && map!=null) {
-            x = event.getX();
-            y = event.getY();
-            Log.d("Touch", "onTouchEvent: "+(x+xMod)+" "+(y+yMod));
             selected = -1;
             for (int i = 0; i < map.size(); i++) {
                 if (Math.abs(event.getX() - (map.get(i).getX() + xMod)) < 48
@@ -76,18 +56,7 @@ public class StarMapDrawer extends SurfaceView implements SurfaceHolder.Callback
                     break;
                 }
             }
-            //Log.d("Touch", String.valueOf(selected));
             starMapDrawerListener.onSectorTouch(selected,xMod,yMod);
-        } else if (event.getAction()==MotionEvent.ACTION_MOVE) {
-            xMod+=event.getX()-x;
-            yMod+=event.getY()-y;
-            //TODO: Максимальное ограничение сдвига
-            xMod=Math.min(75,Math.max(xMod,-width));
-            yMod=Math.min(75,Math.max(yMod,-height));
-            //Log.d("w/h", getWidth() +" "+ getHeight());
-            //Log.d("MOD", xMod +" "+ yMod);
-            x=event.getX();
-            y=event.getY();
         }
         return true;
     }

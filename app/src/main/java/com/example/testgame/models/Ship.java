@@ -1,13 +1,20 @@
 package com.example.testgame.models;
 
+import android.util.Log;
+
 import com.example.testgame.data.Ships;
+import com.example.testgame.interfaces.ShipListener;
 import com.example.testgame.interfaces.StarMapListener;
 
 public class Ship implements StarMapListener {
+
+    private static final String TAG="Ship";
     private PrisonersContainer prisonersContainer;
     private WeaponContainer weaponContainer;
     private Sector sector;
     private InventoryContainer inventoryContainer;
+
+    private ShipListener shipListener;
     private Ships type=Ships.BLOB;
 
     public Ship() {
@@ -41,7 +48,12 @@ public class Ship implements StarMapListener {
 
     @Override
     public void onSectorChanged(Sector sector) {
+        Log.d(TAG,sector.getName());
         this.sector=sector;
-        //notidy sector map
+        shipListener.setSector(sector);
+    }
+
+    public void setShipListener(ShipListener shipListener) {
+        this.shipListener = shipListener;
     }
 }

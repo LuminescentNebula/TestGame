@@ -59,7 +59,7 @@ public class Sector {
     }
 
     public void fill() {
-        this.size=15+random.nextInt(15);
+        size = random.nextInt(15)+15;
         type = random.nextInt(5)+1;
         Log.d("TAG", String.valueOf(type));
 
@@ -73,10 +73,10 @@ public class Sector {
         return new PlaceHolder();
     }
     private void generatePlanets(){
-        planets=new ArrayList<Planet>();
+        planets= new ArrayList<>();
         for (int i=0;i < random.nextInt(3)+3;i++){
             planets.add(new Planet(random,generateName()));
-        };
+        }
     }
 
     private String generateName(){

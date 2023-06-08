@@ -10,11 +10,12 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import com.example.testgame.data.JSONSaver;
+import com.example.testgame.models.Sector;
 import com.example.testgame.models.Ship;
 import com.example.testgame.data.StarMapGenerator;
 import com.example.testgame.views.BottomBar;
 import com.example.testgame.views.PrisonerMenu;
+import com.example.testgame.views.SectorMapView;
 import com.example.testgame.views.ShipView;
 import com.example.testgame.views.StarMapView;
 import com.example.testgame.views.TopBar;
@@ -32,14 +33,15 @@ public class Game extends FragmentActivity {
     private TopBar topBar;
     private BottomBar bottomBar;
     private ShipView shipView;
+    private SectorMapView sectorMapView;
 
 
     //TODO: 1. Sector map
-    //TODO: . PlanetGeneration
+    ////TODO: . PlanetGeneration
     //TODO: . PrisonersDrawer
     //TODO: . Dialog window
-    //TODO: . JSONSaver
-    //TODO: . Ресурсы
+    ////TODO: . JSONSaver
+    ////TODO: . Ресурсы
     //TODO: . Scanning menu
     //TODO: . Animations
     @Override
@@ -64,7 +66,13 @@ public class Game extends FragmentActivity {
         prisonerMenu = new PrisonerMenu();
         topBar = new TopBar();
         bottomBar = new BottomBar();
-        shipView=new ShipView();
+        //shipView = new ShipView();
+
+        sectorMapView = new SectorMapView();
+        Sector sector=new Sector(0,0);
+        sector.fill();
+        sectorMapView.setSector(sector);
+        ship.setShipListener(sectorMapView);
 
         new Handler().post(() -> starMapView=new StarMapView(StarMapGenerator.generate(1),ship));
 
@@ -73,7 +81,7 @@ public class Game extends FragmentActivity {
         if (savedInstanceState == null) {
             fragmentManager.beginTransaction()
                     .setReorderingAllowed(true)
-                    .add(R.id.layout,shipView,"Ship")
+                    .add(R.id.layout, sectorMapView,"Ship")
                     .commit();
             fragmentManager.beginTransaction()
                     .setReorderingAllowed(true)
@@ -94,14 +102,15 @@ public class Game extends FragmentActivity {
             topBar.hide();
             bottomBar.hide();
 
+            sectorMapView.stop();
             fragmentManager.beginTransaction()
                     .setReorderingAllowed(true)
                     .addToBackStack("StarMap")
                     .replace(R.id.layout, starMapView)
                     .commit();
 
-            Log.d("TAGbottom", String.valueOf(bottomBar.isHidden()));
-            Log.d("TAGtop", String.valueOf(topBar.isHidden()));
+            Log.d(TAG, "bottom " + bottomBar.isHidden());
+            Log.d(TAG, "top "+topBar.isHidden());
 
 
         });
@@ -112,7 +121,7 @@ public class Game extends FragmentActivity {
             fragmentManager.clearBackStack("StarMap");
             fragmentManager.beginTransaction()
                     .setReorderingAllowed(true)
-                    .replace(R.id.layout, shipView)
+                    .replace(R.id.layout, sectorMapView)
                     .commit();
         });
     }

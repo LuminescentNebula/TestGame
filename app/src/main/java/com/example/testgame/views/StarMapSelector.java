@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Handler;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -19,6 +20,8 @@ import com.example.testgame.interfaces.StarMapListener;
 import com.example.testgame.models.Sector;
 
 public class StarMapSelector extends LinearLayout {
+
+    private static final String TAG= "StarMapSelector";
     Sector sector;
     TextView name;
     SurfaceView planets;
@@ -29,7 +32,10 @@ public class StarMapSelector extends LinearLayout {
         super(context);
         inflate(getContext(), R.layout.selector, (ViewGroup) getRootView());
         name = findViewById(R.id.sector_name);
-        findViewById(R.id.start).setOnClickListener(v -> starMapListener.onSectorChanged(sector));
+        findViewById(R.id.start).setOnClickListener(v -> {
+                Log.d(TAG,sector.getName());
+                starMapListener.onSectorChanged(sector);
+        });
         planets = findViewById(R.id.planets);
     }
 
@@ -48,7 +54,7 @@ public class StarMapSelector extends LinearLayout {
 
     public void update(Sector sector, float xMod, float yMod) {
         name.setText(sector.getName());
-
+        this.sector=sector;
         Handler handler = new Handler();
         handler.post(() -> {
             if (sector.getPlanetsSize() > 0) {
